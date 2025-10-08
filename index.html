@@ -105,6 +105,24 @@
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="location-input">
+            <label for="input-lokasi">Lokasi:</label>
+            <input type="text" id="input-lokasi" placeholder="Masukkan nama kota...">
+            <button id="search-btn">Cari</button>
+        </div>
+        <div class="weather-card">
+            <p id="lokasi">Memuat...</p>
+            <div id="tampilan">--</div>
+            <div class="details">
+                <p><strong>Negara:</strong> <span id="negara">...</span></p>
+                <p><strong>Provinsi:</strong> <span id="provinsi">...</span></p>
+                <p><strong>Longitude:</strong> <span id="longitude">...</span></p>
+                <p><strong>Latitude:</strong> <span id="latitude">...</span></p>
+            </div>
+        </div>
+    </div>
+
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -112,8 +130,7 @@
         const apiKey = "2b4a1a4c7bf641db9bc64703250810";
         const locationInput = document.getElementById("input-lokasi");
         const searchButton = document.getElementById("search-btn");
-
-
+        
 
 </body>
 </html>
