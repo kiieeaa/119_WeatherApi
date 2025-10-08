@@ -130,7 +130,61 @@
         const apiKey = "2b4a1a4c7bf641db9bc64703250810";
         const locationInput = document.getElementById("input-lokasi");
         const searchButton = document.getElementById("search-btn");
+
+        // 1. Logika AJAX dibungkus dalam sebuah fungsi
+        function getWeatherData() {
+            const city = locationInput.value; // Ambil nama kota dari input
+
+            // Validasi jika input kosong
+            if (!city) {
+                alert("Silakan masukkan nama kota terlebih dahulu.");
+                return;
+            }
+
+            // 2. URL API dibuat dinamis berdasarkan input pengguna
+            const urlapi = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
+
+            $.ajax({
+                url: urlapi,
+                method: "GET",
+                success: function (data){
+                    console.log(data);
+
+                    let suhu = data.current.temp_c;
+                    let namaLokasi = data.location.name;
+                    let negara = data.location.country;
+                    let provinsi = data.location.region;
+                    let longitude = data.location.lon;
+                    let latitude = data.location.lat;
+
+                    document.getElementById("tampilan").innerHTML = suhu;
+                    document.getElementById("lokasi").innerHTML = namaLokasi;
+                    document.getElementById("negara").innerHTML = negara;
+                    document.getElementById("provinsi").innerHTML = provinsi;
+                    document.getElementById("longitude").innerHTML = longitude;
+                    document.getElementById("latitude").innerHTML = latitude;
+                },
+                fail: function (error){
+                    console.log(error);
+                    alert("Lokasi tidak ditemukan. Coba lagi.");
+                }
+            });
+        }
+
+        // 3. Tambahkan event listener untuk tombol dan input
+        searchButton.addEventListener("click", getWeatherData);
+        locationInput.addEventListener("keypress", function(event) {
+            // Jika pengguna menekan tombol "Enter"
+            if (event.key === "Enter") {
+                getWeatherData();
+            }
+        });
         
+        // 4. Muat data default (Yogyakarta) saat halaman pertama kali dibuka
+        locationInput.value = "Yogyakarta"; // Isi input dengan default
+        getWeatherData(); // Panggil fungsi untuk memuat data
+
+    </script>
 
 </body>
 </html>
